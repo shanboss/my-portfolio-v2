@@ -117,3 +117,9 @@ code {
   border-left: 1px solid var(--border-color);
   border-top: 1px solid var(--border-color);
 }
+
+.outline-text {
+  color: transparent; /* Make the fill color transparent */
+  -webkit-text-stroke: 1px red; /* Set the stroke width and color */
+  font-weight: bold; /* Optional: make it bold for better visibility */
+}

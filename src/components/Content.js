@@ -37,13 +37,6 @@ const Content = () => {
                   </div>
                 </li>
                 <li className="my-5">
-                  <div className="max-w-md p-1 rounded-lg ">
-                    Build iOS and Android Apps in{" "}
-                    <span className="font-semibold">Swift</span> and{" "}
-                    <span className="font-semibold">Flutter</span>
-                  </div>
-                </li>
-                <li className="my-5">
                   <div className="max-w-md p-1 rounded-lg">
                     Write code for you in{" "}
                     <span className="font-semibold">Various</span> languages,
@@ -53,6 +46,14 @@ const Content = () => {
                       C, C++, Python, Java{" "}
                     </span>
                     and many more.
+                  </div>
+                </li>
+                <li className="my-5">
+                  <div className="max-w-md p-1 rounded-lg">
+                    Build your own React websites with this
+                    <button className="font-semibold hover:bg-blue-500 rounded-lg px-2">
+                      Template
+                    </button>
                   </div>
                 </li>
               </ul>
