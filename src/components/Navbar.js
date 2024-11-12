@@ -24,10 +24,8 @@ function className(...classes) {
 
 export default function Navbar() {
   return (
-    <div className="bg-white">
-      <CautionMarquee direction={"right"} speed={30} />
+    <div className="bg-black">
       <BannerMarquee />
-      <CautionMarquee direction={"right"} speed={20} />
     </div>
   );
 }
