@@ -5,6 +5,7 @@ import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 import ScrollTopButton from "@/components/ScrollTopButton";
 import BannerMarquee from "@/components/BannerMarquee";
+import FuturisticNavbar from "@/components/FuturisticNavbar";
 
 export default function Home() {
   return (
@@ -13,7 +14,7 @@ export default function Home() {
       <Content />
       <Projects />
       <Contact />
-      <BannerMarquee />
+      <Footer />
       <ScrollTopButton />
     </div>
   );

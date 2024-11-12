@@ -1,25 +1,34 @@
+"use client";
 // Content.js
 /* a new comment */
 import React from "react";
-import My3DModelViewer from "./3DModel";
+
+import ImageSlider from "./ImageSlider";
 
 const Content = () => {
   return (
     <div>
       <div className="bg-neutral-950">
-        <div className="container py-4 mx-auto flex-row">
-          <div className="flex justify-between items-center text-white text-6xl font-regular my-16 mx-8 md:mx-auto">
-            <div>
+        <div className="container py-4 mx-auto">
+          <div className="flex flex-row justify-between items-center text-white text-6xl font-regular my-16 mx-8 md:mx-auto">
+            <div className="">
               Hi, my name is <br />
               <span className="font-bold">
                 Manu.<span className="animate-blink">|</span>
               </span>
             </div>
-            <img
-              className="rounded-full w-[7rem] md:w-32 md:h-auto"
-              src="pfp.png"
-              alt="Profile"
-            />
+            {/* PFP GRID */}
+            {/* <div className="w-1/2 flex justify-end">
+              <ImageSlider
+                images={[
+                  "/cyberManuBlue.png",
+                  "/cyberManuGreen.png",
+                  "/cyberManuRed.png",
+                  "/cyberManuPurple.png",
+                ]}
+                interval={3000} // 3 seconds per image
+              />
+            </div> */}
           </div>
           {/* Border  */}
           <div className="">
