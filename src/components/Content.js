@@ -4,6 +4,7 @@
 import React from "react";
 
 import ImageSlider from "./ImageSlider";
+import Image from "next/image";
 
 const Content = () => {
   return (
@@ -16,6 +17,15 @@ const Content = () => {
               <span className="font-bold">
                 Manu.<span className="animate-blink">|</span>
               </span>
+            </div>
+            <div>
+              <Image
+                src="/pfp.png"
+                width={500}
+                height={500}
+                alt={"profile"}
+                className="w-[7rem] md:w-[10rem] lg:w-[14rem] rounded-full h-auto"
+              />
             </div>
             {/* PFP GRID */}
             {/* <div className="w-1/2 flex justify-end">

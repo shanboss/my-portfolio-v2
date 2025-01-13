@@ -1,6 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
-import { ArrowUpCircleIcon } from "@heroicons/react/24/outline";
+import { ArrowUpIcon } from "@heroicons/react/24/outline";
 export default function ScrollTopButton() {
   const [isVisible, setIsVisible] = useState(false);
 
@@ -29,9 +29,9 @@ export default function ScrollTopButton() {
     isVisible && (
       <button
         onClick={scrollToTop}
-        className="fixed bottom-8 right-8 z-10 bg-red-500 border-2 border-white text-white rounded-full shadow-lg hover:bg-red-400 duration-200 focus:outline-none"
+        className="fixed bottom-8 right-8 p-2 z-10 bg-blue-500 border-2 border-white text-white rounded-full shadow-lg hover:bg-blue-400 duration-200 focus:outline-none"
       >
-        <ArrowUpCircleIcon className="w-12 h-auto" />
+        <ArrowUpIcon className="h-6 w-auto" />
       </button>
     )
   );

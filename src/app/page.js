@@ -14,7 +14,6 @@ export default function Home() {
       <Content />
       <Projects />
       <Contact />
-      <Footer />
       <ScrollTopButton />
     </div>
   );

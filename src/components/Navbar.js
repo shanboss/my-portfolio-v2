@@ -23,9 +23,5 @@ function className(...classes) {
 }
 
 export default function Navbar() {
-  return (
-    <div className="bg-black">
-      <BannerMarquee />
-    </div>
-  );
+  return <div className="bg-black"></div>;
 }
