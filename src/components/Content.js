@@ -71,7 +71,7 @@ const Content = () => {
                   <div className="max-w-md p-1 rounded-lg">
                     Build your own React websites with this
                     <button className="font-semibold hover:bg-blue-500 rounded-lg px-2">
-                      Template
+                      Template (Coming Soon)
                     </button>
                   </div>
                 </li>
