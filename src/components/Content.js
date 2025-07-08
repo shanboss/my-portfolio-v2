@@ -1,12 +1,101 @@
 "use client";
 // Content.js
 /* a new comment */
-import React from "react";
 
-import ImageSlider from "./ImageSlider";
+import { useState, useEffect, useRef } from "react";
+
 import Image from "next/image";
 
+import {
+  Oswald,
+  Lora,
+  Fira_Code,
+  Birthstone,
+  Lexend_Zetta,
+  Pinyon_Script,
+} from "next/font/google";
+
+const lexend = Lexend_Zetta({
+  subsets: ["latin"],
+  weight: "400",
+  variable: "--font-lexend",
+});
+const oswald = Oswald({ subsets: ["latin"], weight: "400" });
+const lora = Lora({ subsets: ["latin"], weight: "400" });
+const firaCode = Fira_Code({ subsets: ["latin"], weight: "400" });
+const birthstone = Birthstone({ subsets: ["latin"], weight: "400" });
+const pinyon = Pinyon_Script({
+  subsets: ["latin"],
+  weight: "400",
+  variable: "--font-pinyon",
+});
+
+const fonts = [
+  firaCode.className,
+
+  oswald.className,
+  pinyon.className,
+  lexend.className,
+  lora.className,
+  birthstone.className,
+];
+
 const Content = () => {
+  const indexRef = useRef(0);
+  const fullText = "Manu";
+  const [text, setText] = useState(fullText);
+  const textRef = useRef(fullText);
+  const [phase, setPhase] = useState("idle"); // 'idle' | 'deleting' | 'typing'
+  const [fontIndex, setFontIndex] = useState(0);
+  const fontIndexRef = useRef(0);
+
+  useEffect(() => {
+    if (phase === "idle") {
+      const timer = setTimeout(() => setPhase("deleting"), 2000);
+      return () => clearTimeout(timer);
+    }
+
+    if (phase === "deleting") {
+      const interval = setInterval(() => {
+        const currentText = textRef.current;
+        if (currentText.length > 0) {
+          const nextText = currentText.slice(0, -1);
+          textRef.current = nextText;
+          setText(nextText);
+        } else {
+          clearInterval(interval);
+          // advance font index once
+          fontIndexRef.current = (fontIndexRef.current + 1) % fonts.length;
+          setFontIndex(fontIndexRef.current);
+          // reset typing index and begin typing
+          indexRef.current = 0;
+          setPhase("typing");
+        }
+      }, 100);
+      return () => clearInterval(interval);
+    }
+
+    if (phase === "typing") {
+      const interval = setInterval(() => {
+        const i = indexRef.current;
+        if (i >= fullText.length) {
+          clearInterval(interval);
+          setTimeout(() => {
+            indexRef.current = 0;
+            setPhase("deleting");
+          }, 3000);
+          return;
+        }
+        // Build next text via ref and state
+        const nextText = textRef.current + fullText[i];
+        textRef.current = nextText;
+        setText(nextText);
+        indexRef.current = i + 1;
+      }, 100);
+      return () => clearInterval(interval);
+    }
+  }, [phase]);
+
   return (
     <div>
       <div className="bg-neutral-950">
@@ -14,9 +103,8 @@ const Content = () => {
           <div className="flex flex-row justify-between items-center text-white text-6xl font-regular my-16 mx-8 md:mx-auto">
             <div className="">
               Hi, my name is <br />
-              <span className="font-bold">
-                Manu.<span className="animate-blink">|</span>
-              </span>
+              <span className={`font-bold ${fonts[fontIndex]}`}>{text}</span>
+              <span className="animate-blink">|</span>
             </div>
             <div>
               <Image

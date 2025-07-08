@@ -10,10 +10,7 @@ const Carousel = ({ cards }) => {
 
   return (
     <div className="relative w-full h-full p-4">
-      <div
-        ref={scrollRef}
-        className="flex overflow-x-scroll no-scrollbar space-x-12 px-4"
-      >
+      <div ref={scrollRef} className="flex overflow-x-scroll space-x-12 px-4">
         {cards.map((card, index) => (
           <div key={index} className="flex-shrink-0">
             <ProjectCard
