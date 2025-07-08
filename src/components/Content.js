@@ -13,6 +13,8 @@ import {
   Birthstone,
   Lexend_Zetta,
   Pinyon_Script,
+  Kalam,
+  Bonheur_Royale,
 } from "next/font/google";
 
 const lexend = Lexend_Zetta({
@@ -20,10 +22,20 @@ const lexend = Lexend_Zetta({
   weight: "400",
   variable: "--font-lexend",
 });
+const bonheur = Bonheur_Royale({
+  subsets: ["latin"],
+  weight: "400",
+  variable: "--font-bonheur",
+});
 const oswald = Oswald({ subsets: ["latin"], weight: "400" });
 const lora = Lora({ subsets: ["latin"], weight: "400" });
 const firaCode = Fira_Code({ subsets: ["latin"], weight: "400" });
 const birthstone = Birthstone({ subsets: ["latin"], weight: "400" });
+const kalam = Kalam({
+  subsets: ["latin"],
+  weight: "400",
+  variable: "--font-kalam",
+});
 const pinyon = Pinyon_Script({
   subsets: ["latin"],
   weight: "400",
@@ -31,8 +43,9 @@ const pinyon = Pinyon_Script({
 });
 
 const fonts = [
+  kalam.className,
   firaCode.className,
-
+  bonheur.className,
   oswald.className,
   pinyon.className,
   lexend.className,
@@ -101,7 +114,7 @@ const Content = () => {
       <div className="bg-neutral-950">
         <div className="container py-4 mx-auto">
           <div className="flex flex-row justify-between items-center text-white text-6xl font-regular my-16 mx-8 md:mx-auto">
-            <div className="">
+            <div className="h-[10rem]">
               Hi, my name is <br />
               <span className={`font-bold ${fonts[fontIndex]}`}>{text}</span>
               <span className="animate-blink">|</span>
@@ -115,18 +128,6 @@ const Content = () => {
                 className="w-[7rem] md:w-[10rem] lg:w-[14rem] rounded-full h-auto"
               />
             </div>
-            {/* PFP GRID */}
-            {/* <div className="w-1/2 flex justify-end">
-              <ImageSlider
-                images={[
-                  "/cyberManuBlue.png",
-                  "/cyberManuGreen.png",
-                  "/cyberManuRed.png",
-                  "/cyberManuPurple.png",
-                ]}
-                interval={3000} // 3 seconds per image
-              />
-            </div> */}
           </div>
           {/* Border  */}
           <div className="">
