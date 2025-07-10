@@ -2,9 +2,12 @@ import "./globals.css";
 
 export const metadata = {
   title: "Manu's Portfolio",
-  description: "Find out how you can give Manu some money",
+  description: "My personal portfolio showcasing projects and skills.",
 };
 
+export const viewport = {
+  themeColor: "#000000",
+};
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
@@ -24,7 +27,6 @@ export default function RootLayout({ children }) {
         />
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
         <link rel="manifest" href="/site.webmanifest" />
-        <meta name="theme-color" content="#ffffff" />
       </head>
       <body className={`antialiased`}>{children}</body>
     </html>
