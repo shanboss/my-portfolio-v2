@@ -1,6 +1,7 @@
+
 "use client";
 // Content.js
-/* a new comment */
+
 
 import { useState, useEffect, useRef } from "react";
 
@@ -16,6 +17,7 @@ import {
   Kalam,
   Bonheur_Royale,
 } from "next/font/google";
+import { AudioVisualizer } from "react-music-visualizer";
 
 const lexend = Lexend_Zetta({
   subsets: ["latin"],
@@ -169,6 +171,7 @@ const Content = () => {
           </div>
         </div>
       </div>
+      <div className="w-full"></div>
     </div>
   );
 };
