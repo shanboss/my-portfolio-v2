@@ -1,6 +1,6 @@
 "use client";
 
-import { AudioVisualizer } from "react-music-visualizer";
+import AudioVisualizer from "@/components/AudioVisualizer";
 
 export default function page() {
   return (

@@ -17,7 +17,6 @@ import {
   Kalam,
   Bonheur_Royale,
 } from "next/font/google";
-import { AudioVisualizer } from "react-music-visualizer";
 
 const lexend = Lexend_Zetta({
   subsets: ["latin"],

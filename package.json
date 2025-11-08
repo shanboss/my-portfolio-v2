@@ -28,7 +28,6 @@
     "react": "19.1.0",
     "react-dom": "19.1.0",
     "react-fast-marquee": "^1.6.5",
-    "react-music-visualizer": "../react-music-visualizer",
     "three": "^0.170.0",
     "three-stdlib": "^2.34.0"
   },
