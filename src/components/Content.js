@@ -62,6 +62,82 @@ const Content = () => {
   const [phase, setPhase] = useState("idle"); // 'idle' | 'deleting' | 'typing'
   const [fontIndex, setFontIndex] = useState(0);
   const fontIndexRef = useRef(0);
+  const sectionRef = useRef(null);
+  const blobRef = useRef(null);
+  const mouse = useRef({ x: 0, y: 0 });
+  const pos = useRef({ x: 0, y: 0 });
+  const vel = useRef({ x: 0, y: 0 });
+  const isInSection = useRef(false);
+
+  useEffect(() => {
+    const section = sectionRef.current;
+    const blob = blobRef.current;
+    if (!section || !blob) return;
+
+    let raf;
+    const lerp = 0.12;
+
+    const animate = () => {
+      const prevX = pos.current.x;
+      const prevY = pos.current.y;
+
+      // Smooth follow with lerp
+      pos.current.x += (mouse.current.x - pos.current.x) * lerp;
+      pos.current.y += (mouse.current.y - pos.current.y) * lerp;
+
+      // Velocity for stretch
+      vel.current.x = pos.current.x - prevX;
+      vel.current.y = pos.current.y - prevY;
+
+      const speed = Math.sqrt(vel.current.x ** 2 + vel.current.y ** 2);
+      // Rotate so the "right" side of the blob faces the movement direction
+      const angle = Math.atan2(vel.current.y, vel.current.x) * (180 / Math.PI);
+
+      // Water droplet: taper the trailing edge (left), keep leading edge (right) round
+      const t = Math.min(speed * 0.06, 0.7); // 0 = circle, ~0.7 = max droplet
+      const lead = 50; // leading edge stays round
+      const tail = Math.round(50 - t * 45); // trailing edge tapers toward a point
+
+      // border-radius: TL TR BR BL
+      // blob is rotated so right = forward, left = trailing
+      const br = `${tail}% ${lead}% ${lead}% ${tail}%`;
+
+      blob.style.left = `${pos.current.x}px`;
+      blob.style.top = `${pos.current.y}px`;
+      blob.style.borderRadius = br;
+      blob.style.transform = `translate(-50%, -50%) rotate(${angle}deg) scale(${1 + t * 0.15}, ${1 - t * 0.08})`;
+
+      raf = requestAnimationFrame(animate);
+    };
+
+    const onMove = (e) => {
+      const rect = section.getBoundingClientRect();
+      mouse.current.x = e.clientX - rect.left;
+      mouse.current.y = e.clientY - rect.top;
+      if (!isInSection.current) {
+        // Snap position on first enter so it doesn't lerp from (0,0)
+        pos.current.x = mouse.current.x;
+        pos.current.y = mouse.current.y;
+        isInSection.current = true;
+      }
+      blob.style.opacity = "1";
+    };
+
+    const onLeave = () => {
+      blob.style.opacity = "0";
+      isInSection.current = false;
+    };
+
+    section.addEventListener("mousemove", onMove);
+    section.addEventListener("mouseleave", onLeave);
+    raf = requestAnimationFrame(animate);
+
+    return () => {
+      section.removeEventListener("mousemove", onMove);
+      section.removeEventListener("mouseleave", onLeave);
+      cancelAnimationFrame(raf);
+    };
+  }, []);
 
   useEffect(() => {
     if (phase === "idle") {
@@ -112,7 +188,14 @@ const Content = () => {
 
   return (
     <div>
-      <div className="bg-neutral-950">
+      <div ref={sectionRef} className="bg-neutral-950 relative overflow-hidden cursor-none">
+        {/* Blend layer: blob + text content, isolated from image */}
+        <div className="absolute inset-0 pointer-events-none" style={{ mixBlendMode: "difference" }}>
+          <div
+            ref={blobRef}
+            className="absolute w-40 h-40 rounded-full bg-white opacity-0 transition-opacity duration-300"
+          />
+        </div>
         <div className="container py-4 mx-auto">
           <div className="flex flex-row justify-between items-center text-white text-6xl font-regular my-16 mx-8 md:mx-auto">
             <div className="h-[10rem]">
@@ -120,7 +203,7 @@ const Content = () => {
               <span className={`font-bold ${fonts[fontIndex]}`}>{text}</span>
               <span className="animate-blink">|</span>
             </div>
-            <div>
+            <div className="relative z-10">
               <Image
                 src="/pfp.png"
                 width={500}
