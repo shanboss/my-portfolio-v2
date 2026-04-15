@@ -45,7 +45,7 @@ export default class Contact extends Component {
                 className="p-1 hover:bg-slate-400 rounded-md max-w-sm cursor-pointer"
                 onClick={() =>
                   window.open(
-                    "https://www.instagram.com/manny__phantom/",
+                    "https://www.instagram.com/its_theredline/",
                     "_blank"
                   )
                 }
