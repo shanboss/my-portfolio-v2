@@ -15,9 +15,6 @@ export default class Contact extends Component {
         <div className="container pb-5 mx-auto ">
           <div className="text-white font-bold text-4xl font-regular py-5 mx-8 md:mx-auto flex flex-col md:flex-row justify-start">
             Contact me here!
-            <span className="md:ml-3">
-              <MoneyAnimation text="$$$$" />
-            </span>
           </div>
           <div>
             <ul className="font-mono list-none text-white text-2xl mx-8 md:mx-auto">
